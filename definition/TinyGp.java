@@ -1,4 +1,4 @@
-/*
+package definition;/*
  * Program:   tiny_gp.java
  *
  * Author:    Riccardo Poli (email: rpoli@essex.ac.uk)
@@ -9,25 +9,24 @@ import java.util.*;
 import java.io.*;
 
 public class TinyGp {
-    double[] fitness;
-    char[][] pop;
-    static Random rd = new Random();
-    static final int
+    private final double[] fitness;
+    private final char[][] pop;
+    private static final Random rd = new Random();
+    private static final int
             ADD = 110,
             SUB = 111,
             MUL = 112,
             DIV = 113,
             FSET_START = ADD,
             FSET_END = DIV;
-    static double[] x = new double[FSET_START];
-    static double minRandom, maxRandom;
-    static char[] program;
-    static int PC;
-    static int varNumber, fitnessCases, randomNumber;
-    static double fBestPop = 0.0, favGPop = 0.0;
-    static long seed;
-    static double avg_len;
-    static final int
+    private static double[] x = new double[FSET_START];
+    private static double minRandom, maxRandom;
+    private static char[] program;
+    private static int PC;
+    private static int varNumber, fitnessCases, randomNumber;
+    private static double fBestPop = 0.0;
+    private static long seed;
+    private static final int
             MAX_LEN = 10000,
             POPSIZE = 100000,
             DEPTH = 5,
@@ -36,9 +35,9 @@ public class TinyGp {
     public static final double
             PMUT_PER_NODE = 0.05,
             CROSSOVER_PROB = 0.9;
-    static double[][] targets;
+    private static double[][] targets;
 
-    double run() { /* Interpreter */
+    private double run() { /* Interpreter */
         char primitive = program[PC++];
         if (primitive < FSET_START)
             return (x[primitive]);
@@ -60,7 +59,7 @@ public class TinyGp {
         return (0.0); // should never get here
     }
 
-    int traverse(char[] buffer, int buffercount) {
+    private int traverse(char[] buffer, int buffercount) {
         if (buffer[buffercount] < FSET_START)
             return (++buffercount);
 
@@ -74,7 +73,7 @@ public class TinyGp {
         return (0); // should never get here
     }
 
-    void setup_fitness(String fname) {
+    private void setup_fitness(String fname) {
         try {
             int i, j;
             String line;
@@ -111,7 +110,7 @@ public class TinyGp {
         }
     }
 
-    double fitness_function(char[] Prog) {
+    private double fitness_function(char[] Prog) {
         int i = 0, len;
         double result, fit = 0.0;
 
@@ -127,7 +126,7 @@ public class TinyGp {
         return (-fit);
     }
 
-    int grow(char[] buffer, int pos, int max, int depth) {
+    private int grow(char[] buffer, int pos, int max, int depth) {
         char prim = (char) rd.nextInt(2);
         int one_child;
 
@@ -158,7 +157,7 @@ public class TinyGp {
         return (0); // should never get here
     }
 
-    int print_indiv(char[] buffer, int buffercounter) {
+    private int print_indiv(char[] buffer, int buffercounter) {
         int a1 = 0, a2;
         if (buffer[buffercounter] < FSET_START) {
             if (buffer[buffercounter] < varNumber)
@@ -195,9 +194,9 @@ public class TinyGp {
     }
 
 
-    static char[] buffer = new char[MAX_LEN];
+    private static final char[] buffer = new char[MAX_LEN];
 
-    char[] create_random_indiv(int depth) {
+    private char[] create_random_indiv(int depth) {
         char[] ind;
         int len;
 
@@ -212,7 +211,7 @@ public class TinyGp {
         return (ind);
     }
 
-    char[][] create_random_pop(int n, int depth, double[] fitness) {
+    private char[][] create_random_pop(int n, int depth, double[] fitness) {
         char[][] pop = new char[n][];
         int i;
 
@@ -224,11 +223,11 @@ public class TinyGp {
     }
 
 
-    void stats(double[] fitness, char[][] pop, int gen) {
+    private void stats(double[] fitness, char[][] pop, int gen) {
         int i, best = rd.nextInt(POPSIZE);
         int node_count = 0;
         fBestPop = fitness[best];
-        favGPop = 0.0;
+        double favGPop = 0.0;
 
         for (i = 0; i < POPSIZE; i++) {
             node_count += traverse(pop[i], 0);
@@ -238,7 +237,7 @@ public class TinyGp {
                 fBestPop = fitness[i];
             }
         }
-        avg_len = (double) node_count / POPSIZE;
+        double avg_len = (double) node_count / POPSIZE;
         favGPop /= POPSIZE;
         System.out.print("Generation=" + gen + " Avg Fitness=" + (-favGPop) +
                 " Best Fitness=" + (-fBestPop) + " Avg Size=" + avg_len +
@@ -248,7 +247,7 @@ public class TinyGp {
         System.out.flush();
     }
 
-    int tournament(double[] fitness, int tsize) {
+    private int tournament(double[] fitness, int tsize) {
         int best = rd.nextInt(POPSIZE), i, competitor;
         double fbest = -1.0e34;
 
@@ -262,7 +261,7 @@ public class TinyGp {
         return (best);
     }
 
-    int negative_tournament(double[] fitness, int tsize) {
+    private int negative_tournament(double[] fitness, int tsize) {
         int worst = rd.nextInt(POPSIZE), i, competitor;
         double fworst = 1e34;
 
@@ -276,7 +275,7 @@ public class TinyGp {
         return (worst);
     }
 
-    char[] crossover(char[] parent1, char[] parent2) {
+    private char[] crossover(char[] parent1, char[] parent2) {
         int xo1start, xo1end, xo2start, xo2end;
         char[] offspring;
         int len1 = traverse(parent1, 0);
@@ -303,7 +302,7 @@ public class TinyGp {
         return (offspring);
     }
 
-    char[] mutation(char[] parent, double pmut) {
+    private char[] mutation(char[] parent, double pmut) {
         int len = traverse(parent, 0), i;
         int mutsite;
         char[] parentcopy = new char[len];
@@ -329,7 +328,7 @@ public class TinyGp {
         return (parentcopy);
     }
 
-    void print_parms() {
+    private void print_parms() {
         System.out.print("-- TINY GP (Java version) --\n");
         System.out.print("SEED=" + seed + "\nMAX_LEN=" + MAX_LEN +
                 "\nPOPSIZE=" + POPSIZE + "\nDEPTH=" + DEPTH +
@@ -353,7 +352,7 @@ public class TinyGp {
         pop = create_random_pop(POPSIZE, DEPTH, fitness);
     }
 
-    void evolve() {
+   public void evolve() {
         int gen = 0, indivs, offspring, parent1, parent2, parent;
         double newfit;
         char[] newind;
