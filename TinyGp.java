@@ -20,11 +20,11 @@ public class TinyGp {
             FSET_START = ADD,
             FSET_END = DIV;
     static double[] x = new double[FSET_START];
-    static double minrandom, maxrandom;
+    static double minRandom, maxRandom;
     static char[] program;
     static int PC;
-    static int varnumber, fitnesscases, randomnumber;
-    static double fbestpop = 0.0, favgpop = 0.0;
+    static int varNumber, fitnessCases, randomNumber;
+    static double fBestPop = 0.0, favGPop = 0.0;
     static long seed;
     static double avg_len;
     static final int
@@ -85,19 +85,19 @@ public class TinyGp {
                                     FileReader(fname));
             line = in.readLine();
             StringTokenizer tokens = new StringTokenizer(line);
-            varnumber = Integer.parseInt(tokens.nextToken().trim());
-            randomnumber = Integer.parseInt(tokens.nextToken().trim());
-            minrandom = Double.parseDouble(tokens.nextToken().trim());
-            maxrandom = Double.parseDouble(tokens.nextToken().trim());
-            fitnesscases = Integer.parseInt(tokens.nextToken().trim());
-            targets = new double[fitnesscases][varnumber + 1];
-            if (varnumber + randomnumber >= FSET_START)
+            varNumber = Integer.parseInt(tokens.nextToken().trim());
+            randomNumber = Integer.parseInt(tokens.nextToken().trim());
+            minRandom = Double.parseDouble(tokens.nextToken().trim());
+            maxRandom = Double.parseDouble(tokens.nextToken().trim());
+            fitnessCases = Integer.parseInt(tokens.nextToken().trim());
+            targets = new double[fitnessCases][varNumber + 1];
+            if (varNumber + randomNumber >= FSET_START)
                 System.out.println("too many variables and constants");
 
-            for (i = 0; i < fitnesscases; i++) {
+            for (i = 0; i < fitnessCases; i++) {
                 line = in.readLine();
                 tokens = new StringTokenizer(line);
-                for (j = 0; j <= varnumber; j++) {
+                for (j = 0; j <= varNumber; j++) {
                     targets[i][j] = Double.parseDouble(tokens.nextToken().trim());
                 }
             }
@@ -116,13 +116,13 @@ public class TinyGp {
         double result, fit = 0.0;
 
         len = traverse(Prog, 0);
-        for (i = 0; i < fitnesscases; i++) {
-            for (int j = 0; j < varnumber; j++)
+        for (i = 0; i < fitnessCases; i++) {
+            for (int j = 0; j < varNumber; j++)
                 x[j] = targets[i][j];
             program = Prog;
             PC = 0;
             result = run();
-            fit += Math.abs(result - targets[i][varnumber]);
+            fit += Math.abs(result - targets[i][varNumber]);
         }
         return (-fit);
     }
@@ -138,7 +138,7 @@ public class TinyGp {
             prim = 1;
 
         if (prim == 0 || depth == 0) {
-            prim = (char) rd.nextInt(varnumber + randomnumber);
+            prim = (char) rd.nextInt(varNumber + randomNumber);
             buffer[pos] = prim;
             return (pos + 1);
         } else {
@@ -161,7 +161,7 @@ public class TinyGp {
     int print_indiv(char[] buffer, int buffercounter) {
         int a1 = 0, a2;
         if (buffer[buffercounter] < FSET_START) {
-            if (buffer[buffercounter] < varnumber)
+            if (buffer[buffercounter] < varNumber)
                 System.out.print("X" + (buffer[buffercounter] + 1) + " ");
             else
                 System.out.print(x[buffer[buffercounter]]);
@@ -227,21 +227,21 @@ public class TinyGp {
     void stats(double[] fitness, char[][] pop, int gen) {
         int i, best = rd.nextInt(POPSIZE);
         int node_count = 0;
-        fbestpop = fitness[best];
-        favgpop = 0.0;
+        fBestPop = fitness[best];
+        favGPop = 0.0;
 
         for (i = 0; i < POPSIZE; i++) {
             node_count += traverse(pop[i], 0);
-            favgpop += fitness[i];
-            if (fitness[i] > fbestpop) {
+            favGPop += fitness[i];
+            if (fitness[i] > fBestPop) {
                 best = i;
-                fbestpop = fitness[i];
+                fBestPop = fitness[i];
             }
         }
         avg_len = (double) node_count / POPSIZE;
-        favgpop /= POPSIZE;
-        System.out.print("Generation=" + gen + " Avg Fitness=" + (-favgpop) +
-                " Best Fitness=" + (-fbestpop) + " Avg Size=" + avg_len +
+        favGPop /= POPSIZE;
+        System.out.print("Generation=" + gen + " Avg Fitness=" + (-favGPop) +
+                " Best Fitness=" + (-fBestPop) + " Avg Size=" + avg_len +
                 "\nBest Individual: ");
         print_indiv(pop[best], 0);
         System.out.print("\n");
@@ -313,7 +313,7 @@ public class TinyGp {
             if (rd.nextDouble() < pmut) {
                 mutsite = i;
                 if (parentcopy[mutsite] < FSET_START)
-                    parentcopy[mutsite] = (char) rd.nextInt(varnumber + randomnumber);
+                    parentcopy[mutsite] = (char) rd.nextInt(varNumber + randomNumber);
                 else
                     switch (parentcopy[mutsite]) {
                         case ADD:
@@ -335,8 +335,8 @@ public class TinyGp {
                 "\nPOPSIZE=" + POPSIZE + "\nDEPTH=" + DEPTH +
                 "\nCROSSOVER_PROB=" + CROSSOVER_PROB +
                 "\nPMUT_PER_NODE=" + PMUT_PER_NODE +
-                "\nMIN_RANDOM=" + minrandom +
-                "\nMAX_RANDOM=" + maxrandom +
+                "\nMIN_RANDOM=" + minRandom +
+                "\nMAX_RANDOM=" + maxRandom +
                 "\nGENERATIONS=" + GENERATIONS +
                 "\nTSIZE=" + TSIZE +
                 "\n----------------------------------\n");
@@ -349,7 +349,7 @@ public class TinyGp {
             rd.setSeed(seed);
         setup_fitness(fname);
         for (int i = 0; i < FSET_START; i++)
-            x[i] = (maxrandom - minrandom) * rd.nextDouble() + minrandom;
+            x[i] = (maxRandom - minRandom) * rd.nextDouble() + minRandom;
         pop = create_random_pop(POPSIZE, DEPTH, fitness);
     }
 
@@ -360,7 +360,7 @@ public class TinyGp {
         print_parms();
         stats(fitness, pop, 0);
         for (gen = 1; gen < GENERATIONS; gen++) {
-            if (fbestpop > -1e-5) {
+            if (fBestPop > -1e-5) {
                 System.out.print("PROBLEM SOLVED\n");
                 System.exit(0);
             }
