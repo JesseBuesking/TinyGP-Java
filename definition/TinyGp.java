@@ -19,7 +19,7 @@ public class TinyGp {
             DIV = 113,
             FSET_START = ADD,
             FSET_END = DIV;
-    private static double[] x = new double[FSET_START];
+    private static final double[] x = new double[FSET_START];
     private static double minRandom, maxRandom;
     private static char[] program;
     private static int PC;
