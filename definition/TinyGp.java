@@ -9,6 +9,8 @@ import java.util.*;
 import java.io.*;
 
 public class TinyGp {
+    private String logName;
+    private StringBuilder sb;
     private final double[] fitness;
     private final char[][] pop;
     private static final Random rd = new Random();
@@ -28,7 +30,8 @@ public class TinyGp {
     private static long seed;
     private static final int
             MAX_LEN = 10000,
-            POPSIZE = 100000,
+//    changed from POPSIZE = 100000,
+            POPSIZE = 25000,
             DEPTH = 5,
             GENERATIONS = 100,
             TSIZE = 2;
@@ -160,36 +163,49 @@ public class TinyGp {
     private int print_indiv(char[] buffer, int buffercounter) {
         int a1 = 0, a2;
         if (buffer[buffercounter] < FSET_START) {
-            if (buffer[buffercounter] < varNumber)
+            if (buffer[buffercounter] < varNumber) {
                 System.out.print("X" + (buffer[buffercounter] + 1) + " ");
-            else
+                sb.append("X").append(buffer[buffercounter] + 1).append(" ");
+            } else{
                 System.out.print(x[buffer[buffercounter]]);
+                 sb.append(x[buffer[buffercounter]]);
+                    }
+
             return (++buffercounter);
         }
         switch (buffer[buffercounter]) {
             case ADD:
+                sb.append("(");
                 System.out.print("(");
                 a1 = print_indiv(buffer, ++buffercounter);
                 System.out.print(" + ");
+                sb.append(" + ");
                 break;
             case SUB:
                 System.out.print("(");
+                sb.append("(");
                 a1 = print_indiv(buffer, ++buffercounter);
                 System.out.print(" - ");
+                sb.append(" - ");
                 break;
             case MUL:
                 System.out.print("(");
+                sb.append("(");
                 a1 = print_indiv(buffer, ++buffercounter);
                 System.out.print(" * ");
+                sb.append(" * ");
                 break;
             case DIV:
                 System.out.print("(");
+                sb.append("(");
                 a1 = print_indiv(buffer, ++buffercounter);
                 System.out.print(" / ");
+                sb.append(" / ");
                 break;
         }
         a2 = print_indiv(buffer, a1);
         System.out.print(")");
+        sb.append(")");
         return (a2);
     }
 
@@ -242,9 +258,23 @@ public class TinyGp {
         System.out.print("Generation=" + gen + " Avg Fitness=" + (-favGPop) +
                 " Best Fitness=" + (-fBestPop) + " Avg Size=" + avg_len +
                 "\nBest Individual: ");
+        sb = new StringBuilder();
         print_indiv(pop[best], 0);
         System.out.print("\n");
         System.out.flush();
+
+
+        try {
+            Writer output;
+            output = new BufferedWriter(new FileWriter(logName, true));
+            output.append("\nGeneration=" + gen + " Avg Fitness=" + (-favGPop) +
+                    " Best Fitness=" + (-fBestPop) + " Avg Size=" + avg_len +
+                    "\nBest Individual: " + sb.toString());
+            output.close();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private int tournament(double[] fitness, int tsize) {
@@ -341,7 +371,9 @@ public class TinyGp {
                 "\n----------------------------------\n");
     }
 
-    public TinyGp(String fname, long s) {
+    public TinyGp(String fname, long s, String logName) {
+        this.logName = logName;
+        this.sb = new StringBuilder();
         fitness = new double[POPSIZE];
         seed = s;
         if (seed >= 0)
@@ -361,7 +393,7 @@ public class TinyGp {
         for (gen = 1; gen < GENERATIONS; gen++) {
             if (fBestPop > -1e-5) {
                 System.out.print("PROBLEM SOLVED\n");
-                System.exit(0);
+//            todo return dis    System.exit(0);
             }
             for (indivs = 0; indivs < POPSIZE; indivs++) {
                 if (rd.nextDouble() < CROSSOVER_PROB) {
@@ -380,6 +412,6 @@ public class TinyGp {
             stats(fitness, pop, gen);
         }
         System.out.print("PROBLEM *NOT* SOLVED\n");
-        System.exit(1);
+//    todo return dis    System.exit(1);
     }
 };
