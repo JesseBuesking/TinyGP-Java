@@ -1,4 +1,3 @@
-
 Generation=0 Avg Fitness=2939.334355748026 Best Fitness=70.03663168806193 Avg Size=11.01816
 Best Individual: (4.782428060182944 * (X1  * 0.09489345452477771))
 Generation=1 Avg Fitness=505.01728645627514 Best Fitness=66.6664853162278 Avg Size=11.02184
