@@ -393,7 +393,7 @@ public class TinyGp {
         for (gen = 1; gen < GENERATIONS; gen++) {
             if (fBestPop > -1e-5) {
                 System.out.print("PROBLEM SOLVED\n");
-//            todo return dis    System.exit(0);
+                System.exit(0);
             }
             for (indivs = 0; indivs < POPSIZE; indivs++) {
                 if (rd.nextDouble() < CROSSOVER_PROB) {
@@ -412,6 +412,6 @@ public class TinyGp {
             stats(fitness, pop, gen);
         }
         System.out.print("PROBLEM *NOT* SOLVED\n");
-//    todo return dis    System.exit(1);
+        System.exit(1);
     }
 };
