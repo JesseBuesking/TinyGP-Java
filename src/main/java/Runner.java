@@ -17,7 +17,7 @@ public class Runner {
 
         //evolve(fname, log);
         // parse();
-        evaluateFunctions();
+        //evaluateFunctions();
     }
 
     private static void evolve(String name, String log) {
@@ -57,7 +57,7 @@ public class Runner {
                 if (optimized != null) {
                     try {
                         Writer output;
-                        output = new BufferedWriter(new FileWriter(dirName
+                        output = new BufferedWriter(new FileWriter(dirName2
                                 .concat("/")
                                 .concat(child.getName()), true));
 
