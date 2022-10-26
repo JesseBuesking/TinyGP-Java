@@ -19,7 +19,7 @@ public class Runner {
 //      evolve(fname, log);
 //      parse();
 //      evaluateFunctions();
-        evolveExtended(fname, log);
+//        evolveExtended(fname, log);
 //      testEvaluate();
     }
 
@@ -35,8 +35,8 @@ public class Runner {
 
     private static void evolveExtended(String name, String log) {
         // passing some example files if arguments empty 1,4
-        String fname = name != null ? name:   "src/main/resources/values/val6_4.dat";
-        String logName = log != null ? log:   "src/main/resources/output-functions/val6_4_ext.txt";
+        String fname = name != null ? name : "src/main/resources/values/val6_4.dat";
+        String logName = log != null ? log : "src/main/resources/output-functions/val6_4_ext.txt";
         long s = 402456;
 
         TinyGpExtended gpe = new TinyGpExtended(fname, s, logName);
