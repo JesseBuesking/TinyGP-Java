@@ -15,15 +15,15 @@ public class Runner {
             log = args[0];
         }
 
-        //evolve(fname, log);
-        // parse();
+//        evolve(fname, log);
+//         parse();
         //evaluateFunctions();
     }
 
     private static void evolve(String name, String log) {
         // passing some example files if arguments empty
-        String fname = name != null ? name : "src/main/resources/values/val6_4.dat";
-        String logName = log != null ? log : "src/main/resources/output-functions/val6_4.txt";
+        String fname = name != null ? name : "src/main/resources/values/tan_w_d_tan.dat";
+        String logName = log != null ? log : "src/main/resources/output-functions/tan_w_d_tan.txt";
         long s = 402456;
 
         TinyGp gp = new TinyGp(fname, s, logName);
@@ -70,6 +70,44 @@ public class Runner {
                 }
             }
         }
+
+    }
+
+    private static void testEvaluate() {
+        Evaluator ev = new Evaluator();
+        String dirName = "src/main/resources/final-functions-not-simplified";
+        String dirName2 = "src/main/resources/final-functions-simplified";
+        File f1 = new File("src/main/resources/final-functions-not-simplified/sin_w_d_sin.txt");
+        File f2 = new File("src/main/resources/final-functions-not-simplified/tan_w_d_tan.txt");
+
+
+        String optimized = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(f1))) {
+            String func = null;
+            while ((func = br.readLine()) != null) {
+
+                optimized = ev.optimize(func);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (optimized != null) {
+            try {
+                Writer output;
+                output = new BufferedWriter(new FileWriter(dirName2
+                        .concat("/")
+                        .concat(f1.getName()), true));
+
+                output.append(optimized);
+                output.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+
 
     }
 }
