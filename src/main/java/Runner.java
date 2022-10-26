@@ -17,7 +17,7 @@ public class Runner {
         }
 
 //      evolve(fname, log);
-//      parse();
+      parse();
 //      evaluateFunctions();
 //        evolveExtended(fname, log);
 //      testEvaluate();
