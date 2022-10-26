@@ -56,10 +56,10 @@ public class TinyGpExtended {
                     return (num / den);
             }
             case SIN: {
-                return Math.sin(Math.toRadians(run()));
+                return Math.sin(run());
             }
             case COS: {
-                return Math.cos(Math.toRadians(run()));
+                return Math.cos(run());//radians?
             }
         }
         return (0.0); // should never get here
@@ -74,9 +74,12 @@ public class TinyGpExtended {
             case SUB:
             case MUL:
             case DIV:
+                return (traverse(buffer, traverse(buffer, ++buffercount)));
+
             case SIN:
             case COS:
-                return (traverse(buffer, traverse(buffer, ++buffercount)));
+                return (traverse(buffer, ++buffercount));
+                //todo return traverse buffer, ++buffer dla sin cos
         }
         return (0); // should never get here
     }
@@ -155,13 +158,18 @@ public class TinyGpExtended {
                 case SUB:
                 case MUL:
                 case DIV:
+                    buffer[pos] = prim;
+                    one_child = grow(buffer, pos + 1, max, depth - 1);
+                    if (one_child < 0)
+                        return (-1);
+                    return (grow(buffer, one_child, max, depth - 1)); //todo return one child if sin cos
                 case SIN:
                 case COS:
                     buffer[pos] = prim;
                     one_child = grow(buffer, pos + 1, max, depth - 1);
                     if (one_child < 0)
                         return (-1);
-                    return (grow(buffer, one_child, max, depth - 1));
+                    return one_child;
             }
         }
         return (0); // should never get here
@@ -370,10 +378,14 @@ public class TinyGpExtended {
                         case SUB:
                         case MUL:
                         case DIV:
-                        case SIN:
+                            parentcopy[mutsite] =
+                                    (char) (rd.nextInt(FSET_END - ADD + 1)
+                                            + ADD);
+                            break;
+                        case SIN: //todo dla sin i cos losowac randoma
                         case COS:
                             parentcopy[mutsite] =
-                                    (char) (rd.nextInt(FSET_END - FSET_START + 1)
+                                    (char) (rd.nextInt(COS -SIN + 1)
                                             + FSET_START);
                     }
             }
