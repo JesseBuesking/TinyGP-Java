@@ -32,16 +32,19 @@ public class Runner {
         TinyGp gp = new TinyGp(fname, s, logName);
         gp.evolve();
     }
+
     private static void evolveExtended(String name, String log) {
-        // passing some example files if arguments empty
-        String fname = name != null ? name : "src/main/resources/values/val2_2.dat";
-        String logName = log != null ? log : "src/main/resources/output-functions/val2_2_ext.txt";
+        // passing some example files if arguments empty 1,4
+        String fname = name != null ? name:   "src/main/resources/values/val6_4.dat";
+        String logName = log != null ? log:   "src/main/resources/output-functions/val6_4_ext.txt";
         long s = 402456;
 
         TinyGpExtended gpe = new TinyGpExtended(fname, s, logName);
         gpe.evolve();
 
+
     }
+
     private static void parse() {
         ParserXLSX parserXLSX = new ParserXLSX();
         parserXLSX.parseAllExistingLogs();
@@ -89,8 +92,8 @@ public class Runner {
         Evaluator ev = new Evaluator();
         String dirName = "src/main/resources/final-functions-not-simplified";
         String dirName2 = "src/main/resources/final-functions-simplified";
-        File f1 = new File("src/main/resources/final-functions-not-simplified/sin_w_d_sin.txt");
-        File f2 = new File("src/main/resources/final-functions-not-simplified/tan_w_d_tan.txt");
+        File f1 = new File("src/main/resources/final-functions-not-simplified/val1_2_ext.txt");
+        File f2 = new File("src/main/resources/final-functions-not-simplified/val1_2.txt");
 
 
         String optimized = null;
@@ -118,7 +121,6 @@ public class Runner {
             }
 
         }
-
 
 
     }
