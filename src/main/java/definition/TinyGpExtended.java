@@ -10,11 +10,13 @@ public class TinyGpExtended {
     private final char[][] pop;
     private static final Random rd = new Random();
     private static final int
-            ADD = 110,
-            SUB = 111,
-            MUL = 112,
-            DIV = 113,
-            FSET_START = ADD,
+            SIN = 110,
+            COS = 111,
+            ADD = 112,
+            SUB = 113,
+            MUL = 114,
+            DIV = 115,
+            FSET_START = SIN,
             FSET_END = DIV;
     private static final double[] x = new double[FSET_START];
     private static double minRandom, maxRandom;
@@ -53,6 +55,12 @@ public class TinyGpExtended {
                 else
                     return (num / den);
             }
+            case SIN: {
+                return Math.sin(Math.toRadians(run()));
+            }
+            case COS: {
+                return Math.cos(Math.toRadians(run()));
+            }
         }
         return (0.0); // should never get here
     }
@@ -66,6 +74,8 @@ public class TinyGpExtended {
             case SUB:
             case MUL:
             case DIV:
+            case SIN:
+            case COS:
                 return (traverse(buffer, traverse(buffer, ++buffercount)));
         }
         return (0); // should never get here
@@ -145,6 +155,8 @@ public class TinyGpExtended {
                 case SUB:
                 case MUL:
                 case DIV:
+                case SIN:
+                case COS:
                     buffer[pos] = prim;
                     one_child = grow(buffer, pos + 1, max, depth - 1);
                     if (one_child < 0)
@@ -197,6 +209,20 @@ public class TinyGpExtended {
                 System.out.print(" / ");
                 sb.append(" / ");
                 break;
+            case SIN:
+                System.out.print("sin(");
+                sb.append("sin(");
+                a2 = print_indiv(buffer, ++buffercounter);
+                System.out.print(")");
+                sb.append(")");
+                return (a2);
+            case COS:
+                System.out.print("cos(");
+                sb.append("cos(");
+                a2 = print_indiv(buffer, ++buffercounter);
+                System.out.print(")");
+                sb.append(")");
+                return (a2);
         }
         a2 = print_indiv(buffer, a1);
         System.out.print(")");
@@ -344,6 +370,8 @@ public class TinyGpExtended {
                         case SUB:
                         case MUL:
                         case DIV:
+                        case SIN:
+                        case COS:
                             parentcopy[mutsite] =
                                     (char) (rd.nextInt(FSET_END - FSET_START + 1)
                                             + FSET_START);
@@ -388,7 +416,8 @@ public class TinyGpExtended {
         for (gen = 1; gen < GENERATIONS; gen++) {
             if (fBestPop > -1e-5) {
                 System.out.print("PROBLEM SOLVED\n");
-                System.exit(0);
+//                System.exit(0);
+                return;
             }
             for (indivs = 0; indivs < POPSIZE; indivs++) {
                 if (rd.nextDouble() < CROSSOVER_PROB) {
@@ -407,6 +436,7 @@ public class TinyGpExtended {
             stats(fitness, pop, gen);
         }
         System.out.print("PROBLEM *NOT* SOLVED\n");
-        System.exit(1);
+//        System.exit(1);
+        return;
     }
 };

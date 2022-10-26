@@ -1,4 +1,5 @@
 import definition.TinyGp;
+import definition.TinyGpExtended;
 import utils.Evaluator;
 import utils.ParserXLSX;
 
@@ -15,9 +16,11 @@ public class Runner {
             log = args[0];
         }
 
-//        evolve(fname, log);
-//         parse();
-        //evaluateFunctions();
+//      evolve(fname, log);
+//      parse();
+      evaluateFunctions();
+//        evolveExtended(fname, log);
+//      testEvaluate();
     }
 
     private static void evolve(String name, String log) {
@@ -29,7 +32,16 @@ public class Runner {
         TinyGp gp = new TinyGp(fname, s, logName);
         gp.evolve();
     }
+    private static void evolveExtended(String name, String log) {
+        // passing some example files if arguments empty
+        String fname = name != null ? name : "src/main/resources/values/val2_2.dat";
+        String logName = log != null ? log : "src/main/resources/output-functions/val2_2_ext.txt";
+        long s = 402456;
 
+        TinyGpExtended gpe = new TinyGpExtended(fname, s, logName);
+        gpe.evolve();
+
+    }
     private static void parse() {
         ParserXLSX parserXLSX = new ParserXLSX();
         parserXLSX.parseAllExistingLogs();
