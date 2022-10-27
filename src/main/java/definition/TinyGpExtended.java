@@ -79,7 +79,7 @@ public class TinyGpExtended {
             case SIN:
             case COS:
                 return (traverse(buffer, ++buffercount));
-                //todo return traverse buffer, ++buffer dla sin cos
+
         }
         return (0); // should never get here
     }
@@ -162,7 +162,7 @@ public class TinyGpExtended {
                     one_child = grow(buffer, pos + 1, max, depth - 1);
                     if (one_child < 0)
                         return (-1);
-                    return (grow(buffer, one_child, max, depth - 1)); //todo return one child if sin cos
+                    return (grow(buffer, one_child, max, depth - 1));
                 case SIN:
                 case COS:
                     buffer[pos] = prim;
@@ -382,7 +382,7 @@ public class TinyGpExtended {
                                     (char) (rd.nextInt(FSET_END - ADD + 1)
                                             + ADD);
                             break;
-                        case SIN: //todo dla sin i cos losowac randoma
+                        case SIN:
                         case COS:
                             parentcopy[mutsite] =
                                     (char) (rd.nextInt(COS -SIN + 1)
