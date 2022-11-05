@@ -16,11 +16,12 @@ public class Runner {
             log = args[0];
         }
 
-        //      evolve(fname, log);
-        parse();
-        //      evaluateFunctions();
-        //        evolveExtended(fname, log);
-        //      testEvaluate();
+
+
+    }
+
+    private static void antlrScan(){
+
     }
 
     private static void evolve(String name, String log) {

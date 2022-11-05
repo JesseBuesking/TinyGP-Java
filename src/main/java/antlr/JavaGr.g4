@@ -98,7 +98,6 @@ instruction: declaration SEMICOLON
 | while_loop
 | do_while_loop SEMICOLON
 | for_loop
-| sin SEMICOLON
 | sout SEMICOLON
 | return_statement SEMICOLON;
 instruction_general: (instruction | COMMENT)*;
@@ -130,7 +129,8 @@ declaration: datatype IDENTIFIER(comma_identifier)*;
 assignment: numeric_type IDENTIFIER EQUAL math_expr
 | CHAR IDENTIFIER EQUAL CHAR_VAL
 | STRING IDENTIFIER EQUAL STRING_VAL
-| BOOL IDENTIFIER EQUAL bool_val;
+| BOOL IDENTIFIER EQUAL bool_val
+| sin;
 add_double: ADD_ ADD_;
 equal_double: EQUAL  EQUAL;
 subtract_double: SUBTRACT_ SUBTRACT_;
