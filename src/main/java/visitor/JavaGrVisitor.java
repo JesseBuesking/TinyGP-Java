@@ -124,11 +124,7 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitContent(JavaGrParser.ContentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#class}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
+
 	T visitClass(JavaGrParser.ClassContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#math_symbol}.
@@ -172,11 +168,7 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMath_modification(JavaGrParser.Math_modificationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#math_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
+
 	T visitMath_expr(JavaGrParser.Math_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#comma_identifier}.
@@ -274,11 +266,7 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor_loop(JavaGrParser.For_loopContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#package}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
+
 	T visitPackage(JavaGrParser.PackageContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#import_op}.
