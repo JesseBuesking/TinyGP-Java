@@ -60,7 +60,8 @@ AND: '&&';
 VOID: 'void';
 IDENTIFIER: [a-zA-Z][a-zA-Z0-9]*;
 WS   : [ \t\r\n]+ -> skip;
-prog: (package (import_op)* class)?;
+//prog: (package (import_op)* class)?;
+prog: function;
 numeric_type: INT
 | FLOAT
 | DOUBLE;
@@ -75,7 +76,7 @@ num_val: (ADD_ | SUBTRACT_)? INT_VAL
 | (ADD_ | SUBTRACT_)? DOUBLE_VAL
 | (ADD_ | SUBTRACT_)? FLOAT_VAL
 | (ADD_ | SUBTRACT_)? IDENTIFIER;
-declaration_var: (PUBLIC | PRIVATE_NEW_VAR | PROTECTED_NEW_VAR)? STATIC_VAR? (declaration | assignment)  SEMICOLON;
+//declaration_var: (PUBLIC | PRIVATE_NEW_VAR | PROTECTED_NEW_VAR)? STATIC_VAR? (declaration | assignment)  SEMICOLON;
 input_vars: datatype IDENTIFIER (COMMA datatype IDENTIFIER)*;
 function_in: BRACKET_L input_vars? BRACKET_R;
 //function_to_ret: (PUBLIC | PRIVATE_NEW_VAR | PROTECTED_NEW_VAR) STATIC_VAR? datatype IDENTIFIER function_in;
@@ -95,9 +96,9 @@ instruction: declaration SEMICOLON
 | return_statement SEMICOLON;
 instruction_general: (instruction | COMMENT)*;
 function_body: PARENT_L instruction_general PARENT_R;
-function: (PUBLIC | PRIVATE_NEW_VAR | PROTECTED_NEW_VAR) STATIC_VAR? (datatype | VOID ) IDENTIFIER function_in function_body ;
-content: declaration_var | function;
-class: PUBLIC CLASS IDENTIFIER PARENT_L  (content)* PARENT_R;
+function: (PUBLIC | PRIVATE_NEW_VAR | PROTECTED_NEW_VAR)? STATIC_VAR? (datatype | VOID ) IDENTIFIER function_in function_body ;
+//content: declaration_var | function;
+//class: PUBLIC CLASS IDENTIFIER PARENT_L  (content)* PARENT_R;
 math_symbol: ADD_
 | SUBTRACT_
 | MULTIPLY
@@ -143,5 +144,5 @@ if_statement: IF logic_condition PARENT_L instruction_general PARENT_R;
 while_loop: WHILE logic_condition PARENT_L instruction_general PARENT_R;
 do_while_loop: DO_ PARENT_L instruction_general PARENT_R WHILE logic_condition;
 for_loop: FOR BRACKET_L assignment SEMICOLON comparison SEMICOLON modification BRACKET_R PARENT_L instruction_general PARENT_R;
-package: PACKAGE IDENTIFIER SEMICOLON;
-import_op: IMPORT IDENTIFIER('.'IDENTIFIER)* SEMICOLON;
+//package: PACKAGE IDENTIFIER SEMICOLON;
+//import_op: IMPORT IDENTIFIER('.'IDENTIFIER)* SEMICOLON;
