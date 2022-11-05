@@ -47,12 +47,6 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNum_val(JavaGrParser.Num_valContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#declaration_var}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclaration_var(JavaGrParser.Declaration_varContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#input_vars}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -119,14 +113,6 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunction(JavaGrParser.FunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#content}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitContent(JavaGrParser.ContentContext ctx);
-
-	T visitClass(JavaGrParser.ClassContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#math_symbol}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -168,7 +154,10 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMath_modification(JavaGrParser.Math_modificationContext ctx);
-
+	/**
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
 	T visitMath_expr(JavaGrParser.Math_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaGrParser#comma_identifier}.
@@ -266,12 +255,16 @@ public interface JavaGrVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor_loop(JavaGrParser.For_loopContext ctx);
-
-	T visitPackage(JavaGrParser.PackageContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaGrParser#import_op}.
+	 * Visit a parse tree produced by {@link JavaGrParser#sout}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImport_op(JavaGrParser.Import_opContext ctx);
+	T visitSout(JavaGrParser.SoutContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaGrParser#sin}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSin(JavaGrParser.SinContext ctx);
 }

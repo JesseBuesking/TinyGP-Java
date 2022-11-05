@@ -60,6 +60,11 @@ AND: '&&';
 VOID: 'void';
 IDENTIFIER: [a-zA-Z][a-zA-Z0-9]*;
 WS   : [ \t\r\n]+ -> skip;
+BUFFERED_READER: 'BufferedReader';
+SOUT_L: 'System.out.print';
+NEW: 'new';
+INPUT_READER: 'InputStreamReader';
+SYS_IN: 'System.in';
 //prog: (package (import_op)* class)?;
 prog: function;
 numeric_type: INT
@@ -93,6 +98,8 @@ instruction: declaration SEMICOLON
 | while_loop
 | do_while_loop SEMICOLON
 | for_loop
+| sin SEMICOLON
+| sout SEMICOLON
 | return_statement SEMICOLON;
 instruction_general: (instruction | COMMENT)*;
 function_body: PARENT_L instruction_general PARENT_R;
@@ -136,6 +143,7 @@ comparator: equal_double
 | LESS
 | GREATER_EQUAL
 | LESS_EQUAL;
+
 comparison: num_val comparator num_val;
 logic_statement: comparison | bool_val;
 logic_operator: OR | AND;
@@ -144,5 +152,7 @@ if_statement: IF logic_condition PARENT_L instruction_general PARENT_R;
 while_loop: WHILE logic_condition PARENT_L instruction_general PARENT_R;
 do_while_loop: DO_ PARENT_L instruction_general PARENT_R WHILE logic_condition;
 for_loop: FOR BRACKET_L assignment SEMICOLON comparison SEMICOLON modification BRACKET_R PARENT_L instruction_general PARENT_R;
+sout: SOUT_L BRACKET_L (STRING_VAL | math_expr | bool_val | CHAR_VAL ) BRACKET_R;
+sin: BUFFERED_READER IDENTIFIER EQUAL NEW BUFFERED_READER PARENT_L NEW INPUT_READER PARENT_L SYS_IN PARENT_R PARENT_R;
 //package: PACKAGE IDENTIFIER SEMICOLON;
 //import_op: IMPORT IDENTIFIER('.'IDENTIFIER)* SEMICOLON;
