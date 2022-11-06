@@ -1,0 +1,10 @@
+Generation=0 Avg Fitness=10624.133075442167 Best Fitness=25.9206879634567 Avg Size=6.90552
+Best Individual: (2.0101589481115756 * X1 )
+Generation=1 Avg Fitness=9817.598668301665 Best Fitness=25.9206879634567 Avg Size=7.56112
+Best Individual: (2.0101589481115756 * X1 )
+Generation=2 Avg Fitness=9392.773095272332 Best Fitness=21.039068665729616 Avg Size=9.39868
+Best Individual: (X2  * (cos((3.1665911702767815 * sin((0.2213808684253129 / -2.540420039223441)))) + (-0.786736930917888 - -3.8227630370480146)))
+Generation=3 Avg Fitness=9089.079393471768 Best Fitness=13.704340949442496 Avg Size=11.48812
+Best Individual: ((X1  - (0.22796156218206498 / -1.23552457453434)) + X1 )
+Generation=4 Avg Fitness=9177.610362916343 Best Fitness=4.605205106145149E-13 Avg Size=13.05772
+Best Individual: ((X2  + X2 ) + X1 )

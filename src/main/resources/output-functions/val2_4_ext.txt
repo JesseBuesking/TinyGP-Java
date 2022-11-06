@@ -1,0 +1,22 @@
+Generation=0 Avg Fitness=891.0222057781286 Best Fitness=26.616013256865436 Avg Size=6.90552
+Best Individual: cos((cos(-3.7610156454776) + X1 ))
+Generation=1 Avg Fitness=293.4297873566479 Best Fitness=26.616013256865436 Avg Size=6.96492
+Best Individual: cos((cos(-3.7610156454776) + X1 ))
+Generation=2 Avg Fitness=164.10753519625703 Best Fitness=26.616013256865436 Avg Size=8.35488
+Best Individual: cos((cos(-3.7610156454776) + X1 ))
+Generation=3 Avg Fitness=174.709746373493 Best Fitness=24.96651908664766 Avg Size=10.0272
+Best Individual: ((sin(cos(4.284462057681099)) * -3.123975326263535) * sin((X1  - (-3.8227630370480146 / cos(cos(0.22796156218206498))))))
+Generation=4 Avg Fitness=185.65964845927815 Best Fitness=0.02523921023646728 Avg Size=11.4766
+Best Individual: (cos(X1 ) + sin(X1 ))
+Generation=5 Avg Fitness=221.89518874301706 Best Fitness=0.02523921023646728 Avg Size=12.57548
+Best Individual: (cos(X1 ) + sin(X1 ))
+Generation=6 Avg Fitness=229.99529501183324 Best Fitness=0.02523921023646728 Avg Size=14.06864
+Best Individual: (sin(X1 ) + cos(X1 ))
+Generation=7 Avg Fitness=217.4606602869067 Best Fitness=0.02523921023646728 Avg Size=16.92096
+Best Individual: (sin(X1 ) + cos(X1 ))
+Generation=8 Avg Fitness=189.90473457801068 Best Fitness=0.02523921023646728 Avg Size=21.93976
+Best Individual: (sin(X1 ) + cos(X1 ))
+Generation=9 Avg Fitness=142.18578858271658 Best Fitness=0.02523921023646728 Avg Size=29.12688
+Best Individual: (sin(X1 ) + cos(X1 ))
+Generation=10 Avg Fitness=113.27223592308735 Best Fitness=0.02523921023646728 Avg Size=38.61624
+Best Individual: (cos(X1 ) + sin(X1 ))
